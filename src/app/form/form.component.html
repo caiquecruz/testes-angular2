@@ -1,0 +1,36 @@
+<h2 class="container col-6">Formulário de envio</h2>
+<div class="card container col-md-6">
+    <form class="card-block" (ngSubmit)="enviar()" #formulario="ngForm">
+      <div class="form-group">
+        <label for="nome">Nome: </label>
+        <input class="form-control" type="text" id="nome" name="nome" [(ngModel)]="data.nome" #nome="ngModel" required>
+        <div [hidden]="!nome.invalid || nome.pristine">
+          <p [ngStyle]="{'color':'red'}">
+            Campo deve ser preenchido.
+          </p>
+        </div>
+      </div>
+        <br>
+      <div class="form-group">
+        <label for="telefone">Telefone: </label>
+        <input class="form-control" type="text" name="telefone" id="telefone" [(ngModel)]="data.telefone">
+        <br>
+        <button class="btn btn-primary" type="submit" [disabled]="formulario.invalid">Enviar</button>
+      </div>
+    </form>
+    <table class="table">
+        <thead>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Telefone</th>
+        </thead>
+          <tbody>
+            <tr *ngFor="let items of listaDeContatos, let i = index">
+              
+              <th>{{i + 1}}</th>
+              <td>{{items.nome}}</td> 
+              <td>{{items.telefone}}</td>
+            </tr>
+          </tbody>
+    </table>
+</div>
