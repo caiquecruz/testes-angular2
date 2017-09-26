@@ -1,0 +1,41 @@
+<h2 class="container col-6">Formulário de envio</h2>
+<div class="card container col-md-6">
+    <form class="card-block" (ngSubmit)="enviar()" #formulario="ngForm">
+      <div class="form-group">
+        <label for="nome">Nome: </label>
+        <input class="form-control" type="text" id="nome" name="nome" [(ngModel)]="data.nome" #nome="ngModel" required>
+        <div [hidden]="!nome.invalid || nome.pristine">
+          <p [ngStyle]="{'color':'red'}">
+            Campo deve ser preenchido.
+          </p>
+        </div>
+      </div>
+        <br>
+      <div class="form-group">
+        <label for="telefone">Telefone: </label>
+        <input class="form-control" type="text" name="telefone" id="telefone" [(ngModel)]="data.telefone">
+        <br>
+        <button class="btn btn-primary" type="submit" [disabled]="formulario.invalid">Enviar</button>
+      </div>
+    </form>
+</div>
+<br>
+<div class="container col-md-6">
+    <button (click)="retornaContatosApi()" class="btn btn-primary">Retorna dados API</button>
+    <button (click)="mostraTabela()" class="btn btn-primary">Show/hide table</button>
+    <br>
+    <br>
+    <div class="container">
+      <h3 class="cold-md-6">Contatos</h3>
+      <table [@tableFade]="tableState" class="tableFade table table-bordered">
+        <thead>
+          <th>Nome</th>
+          <th>Telefone</th>
+        </thead>
+        <tbody *ngFor="let contato of contatos">
+          <td>{{contato.nome}}</td>
+          <td>{{contato.telefone}}</td>
+        </tbody>
+      </table>
+    </div>
+</div>
